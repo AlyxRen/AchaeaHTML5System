@@ -105,7 +105,14 @@ Keybind = Reflex.extend({
 })
 
 Trigger = Reflex.extend({
-
+    init: function(id, name, text, matchtype, case_sensitive,
+                   whole_words, enabled) {
+        this._super(id, 'trigger', name, enabled)
+        this.matching = matchtype
+        this.text = text
+        this.whole_words = whole_words
+        this.case_sensitive = case_sensitive
+    }
 })
 
 Code = Reflex.extend({
@@ -185,13 +192,13 @@ ReflexHelpers = {
         var args = 1 <= arguments.length ? _slice.call(arguments, 0) : []
         return args.join('\n')
     },
-    AliasMatching: {
+    Matching: {
         contains: 'substring',
         begins: 'begins',
         exact: 'exact',
         regex: 'regexp'
     },
-    RewriteHighlightOptions: {
+    ReactionOptions: {
         match: 'match',
         line: 'line',
         prefix: 'prefix',
